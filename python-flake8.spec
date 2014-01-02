@@ -8,7 +8,7 @@
 
 Name:             python-%{modname}
 Version:          2.0
-Release:          4%{?dist}
+Release:          5%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -17,10 +17,16 @@ URL:              http://pypi.python.org/pypi/%{modname}
 Source0:          http://pypi.python.org/packages/source/f/%{modname}/%{modname}-%{version}.tar.gz
 
 BuildArch:        noarch
-BuildRequires:    python2-devel python-nose python-setuptools
+BuildRequires:    python2-devel
+BuildRequires:    python-nose
+BuildRequires:    python-setuptools
 BuildRequires:    python-mccabe >= 0.2
 BuildRequires:    python-pep8 >= 1.4.3
 BuildRequires:    pyflakes >= 0.6.1
+Requires:    python-mccabe >= 0.2
+Requires:    python-pep8 >= 1.4.3
+Requires:    pyflakes >= 0.6.1
+Requires:    python-setuptools
 %if %{with python3}
 BuildRequires:    python3-devel
 BuildRequires:    python3-setuptools
@@ -55,6 +61,11 @@ warning. - a Mercurial hook.
 %package -n python3-%{modname}
 Summary:        Code checking using pep8 and pyflakes
 Group:          Development/Languages
+
+Requires:    python3-setuptools
+Requires:    python3-mccabe >= 0.2
+Requires:    python3-pep8 >= 1.4.3
+Requires:    python3-pyflakes >= 0.6.1
 
 %description -n python3-%{modname}
 Flake8 is a wrapper around these tools:
@@ -141,6 +152,9 @@ popd
 
 
 %changelog
+* Thu Jan 02 2014 Matthias Runge <mrunge@redhat.com> - 2.0-5
+- add missing requires to pep8, python-mccabe and pyflakes (rhbz#1046955)
+
 * Mon Nov 18 2013 Matthias Runge <mrunge@redhat.com> - 2.0-4
 - use __python2 instead of __python
 - add CONTRIBUTORS.txt to py3 docs
