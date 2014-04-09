@@ -7,8 +7,8 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.0
-Release:          5%{?dist}
+Version:          2.1.0
+Release:          1%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -152,6 +152,9 @@ popd
 
 
 %changelog
+* Wed Apr 09 2014 Matthias Runge <mrunge@redhat.com> - 2.1.0-1
+- update to 2.1.0
+
 * Thu Jan 02 2014 Matthias Runge <mrunge@redhat.com> - 2.0-5
 - add missing requires to pep8, python-mccabe and pyflakes (rhbz#1046955)
 
