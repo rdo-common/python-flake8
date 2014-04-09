@@ -23,6 +23,7 @@ BuildRequires:    python-setuptools
 BuildRequires:    python-mccabe >= 0.2
 BuildRequires:    python-pep8 >= 1.4.3
 BuildRequires:    pyflakes >= 0.6.1
+BuildRequires:    python-mock
 Requires:    python-mccabe >= 0.2
 Requires:    python-pep8 >= 1.4.3
 Requires:    pyflakes >= 0.6.1
@@ -34,6 +35,7 @@ BuildRequires:    python3-nose
 BuildRequires:    python3-mccabe >= 0.2
 BuildRequires:    python3-pep8 >= 1.4.3
 BuildRequires:    python3-pyflakes >= 0.6.1
+BuildRequires:    python3-mock
 %endif
 
 %description
