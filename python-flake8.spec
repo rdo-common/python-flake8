@@ -8,7 +8,7 @@
 
 Name:             python-%{modname}
 Version:          2.1.0
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -154,6 +154,9 @@ popd
 
 
 %changelog
+* Wed May 14 2014 Bohuslav Kabrda <bkabrda@redhat.com> - 2.1.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Changes/Python_3.4
+
 * Wed Apr 09 2014 Matthias Runge <mrunge@redhat.com> - 2.1.0-1
 - update to 2.1.0
 
