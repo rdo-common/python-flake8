@@ -7,7 +7,7 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.1.0
+Version:          2.2.5
 Release:          1%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
@@ -21,20 +21,20 @@ BuildRequires:    python2-devel
 BuildRequires:    python-nose
 BuildRequires:    python-setuptools
 BuildRequires:    python-mccabe >= 0.2
-BuildRequires:    python-pep8 >= 1.4.3
-BuildRequires:    pyflakes >= 0.6.1
+BuildRequires:    python-pep8 >= 1.5.7
+BuildRequires:    pyflakes >= 0.8.1
 BuildRequires:    python-mock
 Requires:    python-mccabe >= 0.2
-Requires:    python-pep8 >= 1.4.3
-Requires:    pyflakes >= 0.6.1
+Requires:    python-pep8 >= 1.5.7
+Requires:    pyflakes >= 0.8.1
 Requires:    python-setuptools
 %if %{with python3}
 BuildRequires:    python3-devel
 BuildRequires:    python3-setuptools
 BuildRequires:    python3-nose
 BuildRequires:    python3-mccabe >= 0.2
-BuildRequires:    python3-pep8 >= 1.4.3
-BuildRequires:    python3-pyflakes >= 0.6.1
+BuildRequires:    python3-pep8 >= 1.5.7
+BuildRequires:    python3-pyflakes >= 0.8.1
 BuildRequires:    python3-mock
 %endif
 
@@ -66,7 +66,7 @@ Group:          Development/Languages
 
 Requires:    python3-setuptools
 Requires:    python3-mccabe >= 0.2
-Requires:    python3-pep8 >= 1.4.3
+Requires:    python3-pep8 >= 1.5.7
 Requires:    python3-pyflakes >= 0.6.1
 
 %description -n python3-%{modname}
@@ -154,6 +154,9 @@ popd
 
 
 %changelog
+* Mon Oct 20 2014 Matthias Runge <mrunge@redhat.com> - 2.2.5-1
+- update to 2.2.5 (rhbz#1132878)
+
 * Wed Apr 09 2014 Matthias Runge <mrunge@redhat.com> - 2.1.0-1
 - update to 2.1.0
 
