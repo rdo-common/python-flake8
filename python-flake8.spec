@@ -157,6 +157,13 @@ popd
 * Mon Oct 20 2014 Matthias Runge <mrunge@redhat.com> - 2.2.5-1
 - update to 2.2.5 (rhbz#1132878)
 
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.1.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Wed May 14 2014 Bohuslav Kabrda <bkabrda@redhat.com> - 2.1.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Changes/Python_3.4
+
+
 * Wed Apr 09 2014 Matthias Runge <mrunge@redhat.com> - 2.1.0-1
 - update to 2.1.0
 
