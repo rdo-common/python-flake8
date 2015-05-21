@@ -1,4 +1,4 @@
-%if 0%{?fedora} > 12 
+%if 0%{?fedora} > 12
 %bcond_without python3
 %else
 %bcond_with python3
@@ -7,7 +7,7 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.2.5
+Version:          2.4.1
 Release:          1%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
@@ -154,6 +154,9 @@ popd
 
 
 %changelog
+* Thu May 21 2015 Matej Cepl <mcepl@redhat.com> - 2.4.1-1
+- update to 2.4.1 (rhbz#1178814)
+
 * Mon Oct 20 2014 Matthias Runge <mrunge@redhat.com> - 2.2.5-1
 - update to 2.2.5 (rhbz#1132878)
 
