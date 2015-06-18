@@ -8,7 +8,7 @@
 
 Name:             python-%{modname}
 Version:          2.4.1
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -154,6 +154,9 @@ popd
 
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Thu May 21 2015 Matej Cepl <mcepl@redhat.com> - 2.4.1-1
 - update to 2.4.1 (rhbz#1178814)
 
