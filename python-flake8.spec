@@ -28,15 +28,6 @@ Requires:    python-mccabe >= 0.2
 Requires:    python-pep8 >= 1.5.7
 Requires:    pyflakes >= 0.8.1
 Requires:    python-setuptools
-%if %{with python3}
-BuildRequires:    python3-devel
-BuildRequires:    python3-setuptools
-BuildRequires:    python3-nose
-BuildRequires:    python3-mccabe >= 0.2
-BuildRequires:    python3-pep8 >= 1.5.7
-BuildRequires:    python3-pyflakes >= 0.8.1
-BuildRequires:    python3-mock
-%endif
 
 %description
 Flake8 is a wrapper around these tools:
@@ -69,6 +60,14 @@ Requires:    python3-mccabe >= 0.2
 Requires:    python3-pep8 >= 1.5.7
 Requires:    python3-pyflakes >= 0.6.1
 
+BuildRequires:    python3-devel
+BuildRequires:    python3-setuptools
+BuildRequires:    python3-nose
+BuildRequires:    python3-mccabe >= 0.2
+BuildRequires:    python3-pep8 >= 1.5.7
+BuildRequires:    python3-pyflakes >= 0.8.1
+BuildRequires:    python3-mock
+
 %description -n python3-%{modname}
 Flake8 is a wrapper around these tools:
 
@@ -95,48 +94,64 @@ This is version of the package running with Python 3.
 
 
 %prep
-%setup -q -n %{modname}-%{version}
+%setup -qc
+mv %{modname}-%{version} python2
 
-#sed -i -e '/^#!\s*\/.*bin\/.*python/d' flake8/pep8.py
-#chmod -x flake8/pep8.py
+# remove bundled egg-info
+rm -rf flake8.egg-info
+pushd python2
+
+# copy README.1st CONTRIBUTORS.txt
+cp -a README.rst ..
+cp -a CONTRIBUTORS.txt ..
+
+# remove requirements from setup.py, handled by rpm.
+sed -i '/"pyflakes.*"/d' setup.py
+sed -i '/"pep8.*"/d' setup.py
+sed -i '/"mccabe .*"/d' setup.py
+popd
 
 %if %{with python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-
+cp -a python2 python3
+find python3 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
 %endif
 
 
 %build
+pushd python2
 %{__python2} setup.py build
+popd
 
 %if %{with python3}
-pushd %{py3dir}
+pushd python3
 %{__python3} setup.py build
 popd
 %endif
 
 %install
-unset PYTHONPATH
-rm -rf %{buildroot}
 # Must do the python3 install first because the scripts in /usr/bin are
 # overwritten with every setup.py install (and we want the python2 version
 # to be the default for now).
 %if %{with python3}
-pushd %{py3dir}
+pushd python3
     %{__python3} setup.py install -O1 --skip-build --root %{buildroot}
     mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
 popd
 %endif
 
+pushd python2
 %{__python2} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+popd
 
 
 %check
+pushd python2
 %{__python2} setup.py nosetests --verbosity=2
+popd
 %if %{with python3}
+pushd python3
 %{__python3} setup.py nosetests --verbosity=2
+popd
 %endif
 
 %files
@@ -154,6 +169,9 @@ popd
 
 
 %changelog
+* Mon Jul 06 2015 Matthias Runge <mrunge@redhat.com> - 2.4.1-2
+- fix FTBFS (rhbz#1239837)
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
