@@ -8,7 +8,7 @@
 
 Name:             python-%{modname}
 Version:          2.4.1
-Release:          2%{?dist}
+Release:          3%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -30,24 +30,15 @@ Requires:    pyflakes >= 0.8.1
 Requires:    python-setuptools
 
 %description
-Flake8 is a wrapper around these tools:
+Flake8 is a wrapper around PyFlakes, pep8, and Ned's McCabe script. It
+runs all the tools by launching the single flake8 script, and displays
+the warnings in a per-file, merged output.
 
-- PyFlakes - pep8 - Ned's McCabe script
-
-Flake8 runs all tools by launching the single 'flake8' script, but ignores
-pep8 and PyFlakes extended options and just uses defaults. It displays the
-warnings in a per-file, merged output.
-
-It also adds a few features:
-
-- files that contains with this header are skipped::
-
-# flake8: noqa
-
-- lines that contains a "# NOQA" comment at the end will not issue a
-warning. - a Mercurial hook.
-
-- a McCabe complexity checker.
+It also adds a few features: files that contain "# flake8: noqa" are
+skipped, lines that contain a "# noqa" comment at the end will not
+issue warnings, Git and Mercurial hooks are included, a McCabe
+complexity checker is included, and it is extendable through
+flake8.extension entry points.
 
 
 %if %{with python3}
@@ -69,27 +60,17 @@ BuildRequires:    python3-pyflakes >= 0.8.1
 BuildRequires:    python3-mock
 
 %description -n python3-%{modname}
-Flake8 is a wrapper around these tools:
+Flake8 is a wrapper around PyFlakes, pep8, and Ned's McCabe script. It
+runs all the tools by launching the single flake8 script, and displays
+the warnings in a per-file, merged output.
 
-- PyFlakes - pep8 - Ned's McCabe script
-
-Flake8 runs all tools by launching the single 'flake8' script, but ignores
-pep8 and PyFlakes extended options and just uses defaults. It displays the
-warnings in a per-file, merged output.
-
-It also adds a few features:
-
-- files that contains with this header are skipped::
-
-# flake8: noqa
-
-- lines that contains a "# NOQA" comment at the end will not issue a
-warning. - a Mercurial hook.
-
-- a McCabe complexity checker.
+It also adds a few features: files that contain "# flake8: noqa" are
+skipped, lines that contain a "# noqa" comment at the end will not
+issue warnings, Git and Mercurial hooks are included, a McCabe
+complexity checker is included, and it is extendable through
+flake8.extension entry points.
 
 This is version of the package running with Python 3.
-
 %endif
 
 
@@ -169,6 +150,9 @@ popd
 
 
 %changelog
+* Mon Oct 26 2015 Ville Skyttä <ville.skytta@iki.fi> - 2.4.1-3
+- Update/improve description
+
 * Mon Jul 06 2015 Matthias Runge <mrunge@redhat.com> - 2.4.1-2
 - fix FTBFS (rhbz#1239837)
 
