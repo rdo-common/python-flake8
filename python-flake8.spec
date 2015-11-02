@@ -7,8 +7,8 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.4.1
-Release:          3%{?dist}
+Version:          2.5.0
+Release:          1%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -150,6 +150,9 @@ popd
 
 
 %changelog
+* Mon Nov 02 2015 Matthias Runge <mrunge@redhat.com> - 2.5.0-1
+- update to 2.5.0 (rhbz#1275447)
+
 * Mon Oct 26 2015 Ville Skyttä <ville.skytta@iki.fi> - 2.4.1-3
 - Update/improve description
 
