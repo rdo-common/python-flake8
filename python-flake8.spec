@@ -8,7 +8,7 @@
 
 Name:             python-%{modname}
 Version:          2.5.0
-Release:          2%{?dist}
+Release:          3%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -150,6 +150,9 @@ popd
 
 
 %changelog
+* Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
+
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
 
