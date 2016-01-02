@@ -7,8 +7,8 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.5.0
-Release:          3%{?dist}
+Version:          2.5.1
+Release:          1%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
 Group:            Development/Languages
@@ -150,6 +150,9 @@ popd
 
 
 %changelog
+* Wed Dec 30 2015 Ville Skyttä <ville.skytta@iki.fi> - 2.5.1-1
+- Update to 2.5.1 (rhbz#1289545)
+
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
 
