@@ -9,7 +9,7 @@
 Name:             python-%{modname}
 Version:          2.5.1
 Release:          1%{?dist}
-Summary:          Code checking using pep8 and pyflakes
+Summary:          Python code checking using pep8 and pyflakes
 
 License:          MIT
 URL:              http://pypi.python.org/pypi/%{modname}
@@ -29,7 +29,7 @@ complexity checker is included, and it is extendable through
 flake8.extension entry points.
 
 %package -n python2-%{modname}
-Summary:        Code checking using pep8 and pyflakes
+Summary:        Python code checking using pep8 and pyflakes
 
 Obsoletes:   python-%{modname} < 2.5.1
 %{?python_provide:%python_provide python2-%{modname}}
@@ -60,7 +60,7 @@ flake8.extension entry points.
 
 %if %{with python3}
 %package -n python3-%{modname}
-Summary:        Code checking using pep8 and pyflakes
+Summary:        Python code checking using pep8 and pyflakes
 
 %{?python_provide:%python_provide python3-%{modname}}
 
