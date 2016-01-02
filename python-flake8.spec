@@ -1,4 +1,4 @@
-%if 0%{?fedora} > 12
+%if 0%{?fedora}
 %bcond_without python3
 %else
 %bcond_with python3
@@ -79,7 +79,7 @@ This is version of the package running with Python 3.
 mv %{modname}-%{version} python2
 
 # remove bundled egg-info
-rm -rf flake8.egg-info
+rm -r flake8.egg-info
 pushd python2
 
 # copy README.1st CONTRIBUTORS.txt
@@ -90,6 +90,7 @@ cp -a CONTRIBUTORS.txt ..
 sed -i '/"pyflakes.*"/d' setup.py
 sed -i '/"pep8.*"/d' setup.py
 sed -i '/"mccabe .*"/d' setup.py
+
 popd
 
 %if %{with python3}
@@ -137,7 +138,6 @@ popd
 
 %files
 %doc README.rst CONTRIBUTORS.txt
-
 %{_bindir}/%{modname}
 %{python_sitelib}/%{modname}*
 
