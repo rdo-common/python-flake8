@@ -11,23 +11,11 @@ Version:          2.5.1
 Release:          1%{?dist}
 Summary:          Code checking using pep8 and pyflakes
 
-Group:            Development/Languages
 License:          MIT
 URL:              http://pypi.python.org/pypi/%{modname}
 Source0:          http://pypi.python.org/packages/source/f/%{modname}/%{modname}-%{version}.tar.gz
 
 BuildArch:        noarch
-BuildRequires:    python2-devel
-BuildRequires:    python-nose
-BuildRequires:    python-setuptools
-BuildRequires:    python-mccabe >= 0.2.1
-BuildRequires:    python-pep8 >= 1.5.7
-BuildRequires:    pyflakes >= 0.8.1
-BuildRequires:    python-mock
-Requires:    python-mccabe >= 0.2.1
-Requires:    python-pep8 >= 1.5.7
-Requires:    pyflakes >= 0.8.1
-Requires:    python-setuptools
 
 %description
 Flake8 is a wrapper around PyFlakes, pep8, and Ned's McCabe script. It
@@ -40,11 +28,41 @@ issue warnings, Git and Mercurial hooks are included, a McCabe
 complexity checker is included, and it is extendable through
 flake8.extension entry points.
 
+%package -n python2-%{modname}
+Summary:        Code checking using pep8 and pyflakes
+
+Obsoletes:   python-%{modname} < 2.5.1
+%{?python_provide:%python_provide python2-%{modname}}
+
+Requires:    python-mccabe >= 0.2.1
+Requires:    python-pep8 >= 1.5.7
+Requires:    pyflakes >= 0.8.1
+Requires:    python-setuptools
+
+BuildRequires:    python2-devel
+BuildRequires:    python-nose
+BuildRequires:    python-setuptools
+BuildRequires:    python-mccabe >= 0.2.1
+BuildRequires:    python-pep8 >= 1.5.7
+BuildRequires:    pyflakes >= 0.8.1
+BuildRequires:    python-mock
+
+%description -n python2-%{modname}
+Flake8 is a wrapper around PyFlakes, pep8, and Ned's McCabe script. It
+runs all the tools by launching the single flake8 script, and displays
+the warnings in a per-file, merged output.
+
+It also adds a few features: files that contain "# flake8: noqa" are
+skipped, lines that contain a "# noqa" comment at the end will not
+issue warnings, Git and Mercurial hooks are included, a McCabe
+complexity checker is included, and it is extendable through
+flake8.extension entry points.
 
 %if %{with python3}
 %package -n python3-%{modname}
 Summary:        Code checking using pep8 and pyflakes
-Group:          Development/Languages
+
+%{?python_provide:%python_provide python3-%{modname}}
 
 Requires:    python3-setuptools
 Requires:    python3-mccabe >= 0.2.1
@@ -75,71 +93,43 @@ This is version of the package running with Python 3.
 
 
 %prep
-%setup -qc
-mv %{modname}-%{version} python2
+%setup -q -n %{modname}-%{version}
 
 # remove bundled egg-info
 rm -r flake8.egg-info
 # ...and byte-compiled files
 find . -name __pycache__ -o -name "*.pyc" -print0 | xargs -0 rm -r
 
-pushd python2
-
-# copy README.1st CONTRIBUTORS.txt
-cp -a README.rst ..
-cp -a CONTRIBUTORS.txt ..
-
 # remove requirements from setup.py, handled by rpm.
 sed -i '/"pyflakes.*"/d' setup.py
 sed -i '/"pep8.*"/d' setup.py
 sed -i '/"mccabe .*"/d' setup.py
 
-popd
-
-%if %{with python3}
-cp -a python2 python3
-find python3 -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-%endif
-
 
 %build
-pushd python2
-%{__python2} setup.py build
-popd
-
+%py2_build
 %if %{with python3}
-pushd python3
-%{__python3} setup.py build
-popd
+%py3_build
 %endif
+
 
 %install
 # Must do the python3 install first because the scripts in /usr/bin are
 # overwritten with every setup.py install (and we want the python2 version
 # to be the default for now).
 %if %{with python3}
-pushd python3
-    %{__python3} setup.py install -O1 --skip-build --root %{buildroot}
-    mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
-popd
+%py3_install
+mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
 %endif
-
-pushd python2
-%{__python2} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
-popd
+%py2_install
 
 
 %check
-pushd python2
 %{__python2} setup.py nosetests --verbosity=2
-popd
-%if %{with python3}
-pushd python3
-%{__python3} setup.py nosetests --verbosity=2
-popd
-%endif
+%{?with_python3:%{__python3} setup.py nosetests --verbosity=2}
 
-%files
+
+%files -n python2-%{modname}
 %doc README.rst CONTRIBUTORS.txt
 %{_bindir}/%{modname}
 %{python_sitelib}/%{modname}*
@@ -155,6 +145,7 @@ popd
 %changelog
 * Wed Dec 30 2015 Ville Skyttä <ville.skytta@iki.fi> - 2.5.1-1
 - Update to 2.5.1 (rhbz#1289545)
+- Update to current Fedora Python packaging guidelines
 
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
