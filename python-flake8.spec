@@ -80,6 +80,9 @@ mv %{modname}-%{version} python2
 
 # remove bundled egg-info
 rm -r flake8.egg-info
+# ...and byte-compiled files
+find . -name __pycache__ -o -name "*.pyc" -print0 | xargs -0 rm -r
+
 pushd python2
 
 # copy README.1st CONTRIBUTORS.txt
