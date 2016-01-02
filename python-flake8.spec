@@ -20,11 +20,11 @@ BuildArch:        noarch
 BuildRequires:    python2-devel
 BuildRequires:    python-nose
 BuildRequires:    python-setuptools
-BuildRequires:    python-mccabe >= 0.2
+BuildRequires:    python-mccabe >= 0.2.1
 BuildRequires:    python-pep8 >= 1.5.7
 BuildRequires:    pyflakes >= 0.8.1
 BuildRequires:    python-mock
-Requires:    python-mccabe >= 0.2
+Requires:    python-mccabe >= 0.2.1
 Requires:    python-pep8 >= 1.5.7
 Requires:    pyflakes >= 0.8.1
 Requires:    python-setuptools
@@ -47,14 +47,14 @@ Summary:        Code checking using pep8 and pyflakes
 Group:          Development/Languages
 
 Requires:    python3-setuptools
-Requires:    python3-mccabe >= 0.2
+Requires:    python3-mccabe >= 0.2.1
 Requires:    python3-pep8 >= 1.5.7
 Requires:    python3-pyflakes >= 0.6.1
 
 BuildRequires:    python3-devel
 BuildRequires:    python3-setuptools
 BuildRequires:    python3-nose
-BuildRequires:    python3-mccabe >= 0.2
+BuildRequires:    python3-mccabe >= 0.2.1
 BuildRequires:    python3-pep8 >= 1.5.7
 BuildRequires:    python3-pyflakes >= 0.8.1
 BuildRequires:    python3-mock
