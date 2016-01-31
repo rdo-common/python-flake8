@@ -7,7 +7,7 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.5.1
+Version:          2.5.2
 Release:          1%{?dist}
 Summary:          Python code checking using pep8 and pyflakes
 
@@ -143,6 +143,9 @@ mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
 
 
 %changelog
+* Sun Jan 31 2016 Ville Skyttä <ville.skytta@iki.fi> - 2.5.2-1
+- Update to 2.5.2 (rhbz#1303383)
+
 * Wed Dec 30 2015 Ville Skyttä <ville.skytta@iki.fi> - 2.5.1-1
 - Update to 2.5.1 (rhbz#1289545)
 - Update to current Fedora Python packaging guidelines
