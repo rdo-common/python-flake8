@@ -7,13 +7,13 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.5.4
+Version:          2.5.5
 Release:          1%{?dist}
 Summary:          Python code checking using pep8 and pyflakes
 
 License:          MIT
 URL:              http://pypi.python.org/pypi/%{modname}
-Source0:          http://pypi.python.org/packages/source/f/%{modname}/%{modname}-%{version}.tar.gz
+Source0:          https://files.pythonhosted.org/packages/source/f/%{modname}/%{modname}-%{version}.tar.gz
 
 BuildArch:        noarch
 
@@ -97,8 +97,6 @@ This is version of the package running with Python 3.
 
 # remove bundled egg-info
 rm -r flake8.egg-info
-# ...and byte-compiled files
-find . -name __pycache__ -o -name "*.pyc" -print0 | xargs -0 rm -r
 
 # remove requirements from setup.py, handled by rpm.
 sed -i '/"pyflakes.*"/d' setup.py
@@ -143,6 +141,9 @@ mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
 
 
 %changelog
+* Wed Jun 15 2016 Ville Skyttä <ville.skytta@iki.fi> - 2.5.5-1
+- Update to 2.5.5 (rhbz#1346516)
+
 * Fri Feb 12 2016 Ville Skyttä <ville.skytta@iki.fi> - 2.5.4-1
 - Update to 2.5.4 (rhbz#1306870)
 
