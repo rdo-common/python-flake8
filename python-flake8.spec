@@ -8,7 +8,7 @@
 
 Name:             python-%{modname}
 Version:          2.5.5
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          Python code checking using pep8 and pyflakes
 
 License:          MIT
@@ -141,6 +141,9 @@ mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
 
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.5-2
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Wed Jun 15 2016 Ville Skyttä <ville.skytta@iki.fi> - 2.5.5-1
 - Update to 2.5.5 (rhbz#1346516)
 
