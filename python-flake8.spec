@@ -117,9 +117,13 @@ sed -i '/"mccabe .*"/d' setup.py
 # to be the default for now).
 %if %{with python3}
 %py3_install
-mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
+mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/flake8-3
+ln -s flake8-3 %{buildroot}%{_bindir}/flake8-%{python3_version}
+ln -s flake8-3 %{buildroot}%{_bindir}/python3-flake8  # backwards compat
 %endif
 %py2_install
+ln -s flake8 %{buildroot}%{_bindir}/flake8-2
+ln -s flake8-2 %{buildroot}%{_bindir}/flake8-%{python2_version}
 
 
 %check
@@ -129,18 +133,26 @@ mv %{buildroot}%{_bindir}/flake8 %{buildroot}%{_bindir}/python3-flake8
 
 %files -n python2-%{modname}
 %doc README.rst CONTRIBUTORS.txt
+%{_bindir}/flake8
+%{_bindir}/flake8-2
+%{_bindir}/flake8-%{python2_version}
 %{_bindir}/%{modname}
 %{python_sitelib}/%{modname}*
 
 %if %{with python3}
 %files -n python3-%{modname}
 %doc README.rst CONTRIBUTORS.txt
+%{_bindir}/flake8-3
+%{_bindir}/flake8-%{python3_version}
 %{_bindir}/python3-flake8
 %{python3_sitelib}/%{modname}*
 %endif
 
 
 %changelog
+* Sat Sep 17 2016 Ville Skyttä <ville.skytta@iki.fi>
+- Add standard versioned names for executable
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.5-2
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
