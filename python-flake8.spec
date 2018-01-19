@@ -7,8 +7,8 @@
 %global modname flake8
 
 Name:             python-%{modname}
-Version:          2.5.5
-Release:          2%{?dist}
+Version:          2.6.2
+Release:          1%{?dist}
 Summary:          Python code checking using pep8 and pyflakes
 
 License:          MIT
@@ -35,7 +35,7 @@ Obsoletes:   python-%{modname} < 2.5.1
 %{?python_provide:%python_provide python2-%{modname}}
 
 Requires:    python-mccabe >= 0.2.1
-Requires:    python-pep8 >= 1.5.7
+Requires:    python-pycodestyle >= 2.0
 Requires:    pyflakes >= 0.8.1
 Requires:    python-setuptools
 
@@ -43,7 +43,7 @@ BuildRequires:    python2-devel
 BuildRequires:    python-nose
 BuildRequires:    python-setuptools
 BuildRequires:    python-mccabe >= 0.2.1
-BuildRequires:    python-pep8 >= 1.5.7
+BuildRequires:    python-pycodestyle >= 2.0
 BuildRequires:    pyflakes >= 0.8.1
 BuildRequires:    python-mock
 
@@ -66,14 +66,14 @@ Summary:        Python code checking using pep8 and pyflakes
 
 Requires:    python3-setuptools
 Requires:    python3-mccabe >= 0.2.1
-Requires:    python3-pep8 >= 1.5.7
+Requires:    python3-pycodestyle >= 2.0
 Requires:    python3-pyflakes >= 0.6.1
 
 BuildRequires:    python3-devel
 BuildRequires:    python3-setuptools
 BuildRequires:    python3-nose
 BuildRequires:    python3-mccabe >= 0.2.1
-BuildRequires:    python3-pep8 >= 1.5.7
+BuildRequires:    python3-pycodestyle >= 2.0
 BuildRequires:    python3-pyflakes >= 0.8.1
 BuildRequires:    python3-mock
 
@@ -100,7 +100,7 @@ rm -r flake8.egg-info
 
 # remove requirements from setup.py, handled by rpm.
 sed -i '/"pyflakes.*"/d' setup.py
-sed -i '/"pep8.*"/d' setup.py
+sed -i '/"pycodestyle.*"/d' setup.py
 sed -i '/"mccabe .*"/d' setup.py
 
 
@@ -150,6 +150,9 @@ ln -s flake8-2 %{buildroot}%{_bindir}/flake8-%{python2_version}
 
 
 %changelog
+* Thu Jan 18 2018 Haïkel Guémar <hguemar@fedoraproject.org> - 2.6.2-1
+- Upstream 2.6.2 (switch from pep8 to pycodestyle)
+
 * Sat Sep 17 2016 Ville Skyttä <ville.skytta@iki.fi>
 - Add standard versioned names for executable
 
